@@ -8,6 +8,7 @@ Todo: </br>
 - Create Backend with node-express to store data in MongoDb.</br>
 </br>
 Known issues: </br>
+- Cell component seems very heavy in logic which can be reused in other parts maybe.</br>
 - After you click on show answers, need to set all words to solved. </br>
 - If game is too small, can cause infinite loop (because words dont fit)</br>
 </br>
