@@ -6,6 +6,7 @@ Todo: </br>
 - Allow user to define name.</br>
 - Track player score with localStorage.</br>
 - Create Backend with node-express to store data in MongoDb.</br>
+- Code clean up and add more comments.</br>
 </br>
 Known issues: </br>
 - Cell component seems very heavy in logic which can be reused in other parts maybe.</br>
