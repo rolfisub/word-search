@@ -7,6 +7,6 @@ Known issues: </br>
 
 Todo: </br>
 - Allow user to define name.</br>
-- Track player score </br>
+- Track player score with localStorage.</br>
 - Create Backend with node-express to store data in MongoDb.</br>
   
