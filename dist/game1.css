@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 17, 2017, 5:25:43 PM
+    Author     : rolf
+*/
+.ws-cell-can-click:hover {
+  background-color: red; }
+
+.ws-cell {
+  border: 1px solid blue;
+  width: 20px;
+  height: 20px;
+  float: left;
+  text-align: center;
+  cursor: pointer; }
+
+.ws-cell-clicked {
+  background-color: orange; }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Game 1 by Rolf</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="/dist/game1.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div id="wordSearch">
+                <h3>Welcome to Word Search Game</h3>
+                <label for="gameSize">
+                    Game size: <input name="gameSize" type="number" v-model="game.size"/>
+                </label>
+                </br>
+                <label for="wordCount">
+                    Word count: <input name="wordCount" type="number" v-model="game.words.count"/>
+                </label>
+                </br>
+                <h4>Words to find:</h4>
+                <ul>
+                    <li v-for="word in game.words.words">{{word.word}} <span v-if="word.solved"class="glyphicon glyphicon-check alert-success"></span></li>
+                </ul>
+                <h4>Selected Word: {{game.currentWord}}<h4>  </br>
+                <button class="btn btn-primary" v-on:click="newGame">Create New Game</button>
+                <button class="btn btn-success" v-on:click="submitWord">Submit Word</button>
+                <button class="btn btn-warning" v-on:click="showAnswers">Show Answers</button>
+                </br></br>
+                <board v-bind:game="game"></board>
+            </div>
+        </div>
+        <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="dist/game1.js"></script>
+    </body>
+</html>
