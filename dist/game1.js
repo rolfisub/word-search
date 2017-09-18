@@ -466,22 +466,34 @@ var ws = new Vue({
                 var existingWords = game.words.words;
                 var badCol = 0;
                 var validCol = 0;
+                var allVectors = [];
                 existingWords.forEach(function(word2){
                     var vectors2 = word2.vectors;
                     vectors2.forEach(function(vector2){
                         if(isXYInBoard(game, vector2.x, vector2.y)) {
-                            word.direction = direction;
-                            var vectors = getWordVectors(game, word);
-                            word.vectors = vectors;
-                            word.vectors.forEach(function(vector){
-                                console.log(vector);console.log(vector2);
-                                if(vector.x === vector2.x && vector.y === vector2.y) {
-                                    badCol++;
-                                }
-                            }, this);
+                            allVectors.push(vector2);
                         }
                     }, this);
                 }, this);
+                
+                var newWord = {
+                    solved: false,
+                    word: word.word,
+                    x: startPos.x,
+                    y: startPos.y,
+                    direction: direction
+                };
+                
+                newWord.vectors = getWordVectors(game, newWord);
+                
+                newWord.vectors.forEach(function(vector){
+                    allVectors.forEach(function(vector2){
+                        if(vector.x === vector2.x && vector.y === vector2.y) {
+                            badCol++;
+                        }
+                    }, this);
+                }, this);
+                
                 
                 if(badCol > 0) {
                     return false;
