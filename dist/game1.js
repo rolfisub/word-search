@@ -544,11 +544,29 @@ var ws = new Vue({
                 var rVector = getRandomXY(game);
                 //get random direction
                 var rDirection = getRandomDirection(game);
+                
                 //loop untill fit found
-                while(!isWordOkToDraw(game, rVector, rDirection, word)) {
+                var loopCounter = 0;
+                var maxLoops = 1000;
+                while(!isWordOkToDraw(game, rVector, rDirection, word) && loopCounter < maxLoops ) {
                     //get both again
                     rVector = getRandomXY(game);
                     rDirection = getRandomDirection(game);
+                    
+                    //avoid infinite loop
+                    loopCounter++;
+                }
+                
+                //error game is not valid
+                if(loopCounter === maxLoops) {
+                    //remove one word
+                    game.words.count--;
+                    //add one cell
+                    game.size++;
+                    
+                    //create new game
+                    this.newGame();
+                    
                 }
                 word.x = rVector.x;
                 word.y = rVector.y;
