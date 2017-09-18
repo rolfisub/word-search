@@ -1,6 +1,8 @@
 # word-search game
 
 Todo: </br>
+- GUI overhaul. </br>
+- Allow word overlapping only if letter matches, maximum of 1 letter overlapp will be allowed.</br>
 - Allow user to define name.</br>
 - Track player score with localStorage.</br>
 - Create Backend with node-express to store data in MongoDb.</br>
