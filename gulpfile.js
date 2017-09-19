@@ -5,11 +5,13 @@
 var gulp = require('gulp');
 var config =  require('./gulp.config.js');
 var concat = require('gulp-concat');
+var order = require('gulp-order');
 var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 
 gulp.task('scripts', function(){
     return gulp.src(config.source.scripts)
+            .pipe(order(config.source.scripts))
             .pipe(concat(config.build.appFile))
             .pipe(gulp.dest(config.build.scriptsDest));
 });

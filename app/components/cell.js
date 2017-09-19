@@ -13,6 +13,9 @@ Vue.component(
             game:{
                 type: Object,
                 required: true
+            },
+            submitWord: {
+                required: true
             }
         },
         data: function(){
@@ -156,6 +159,9 @@ Vue.component(
                             activateAllowedCells(this.game, cell);
                         }
                     }
+                    
+                    //auto submit word
+                    this.submitWord();
                 }
             }
         },

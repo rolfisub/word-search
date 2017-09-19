@@ -23,7 +23,7 @@ var ws = new Vue({
                     canClick: true
                 };
             },
-            size: 16,
+            size: 8,
             cells: [],
             allowedLetters: [
                 'A','B','C','D','E','F','G','H','I',
@@ -33,7 +33,7 @@ var ws = new Vue({
             currentWord: '',
             words: {
                 words:[],
-                count: 5,
+                count: 3,
                 maxCollisionLetters: 1
             },
             allowedDirections:[
@@ -351,7 +351,7 @@ var ws = new Vue({
                 
                 //loop untill fit found
                 var loopCounter = 0;
-                var maxLoops = 1000;
+                var maxLoops = 500;
                 while(!isWordOkToDraw(game, rVector, rDirection, word) && loopCounter < maxLoops ) {
                     //get both again
                     rVector = getRandomXY(game);
@@ -412,7 +412,17 @@ var ws = new Vue({
                 }, this);
             }, this);
         }
+    },
+    mounted: function() {
+        
+        /**
+         * Trigger new game on load
+         */
+        this.newGame();
+        
+        
     }
+    
 });
 
 //board

@@ -17,6 +17,8 @@ and open the template in the editor.
         <div class="container-fluid">
             <div id="wordSearch">
                 <h3>Welcome to Word Search Game</h3>
+                <h4>Selected Word: {{game.currentWord}}<h4>
+                <board v-bind:game="game" v-bind:submit-word="submitWord"></board>
                 <label for="gameSize">
                     Game size: <input name="gameSize" type="number" v-model="game.size"/>
                 </label>
@@ -29,12 +31,12 @@ and open the template in the editor.
                 <ul>
                     <li v-for="word in game.words.words">{{word.word}} <span v-if="word.solved"class="glyphicon glyphicon-check alert-success"></span></li>
                 </ul>
-                <h4>Selected Word: {{game.currentWord}}<h4>  </br>
+                
                 <button class="btn btn-primary" v-on:click="newGame">Create New Game</button>
                 <button class="btn btn-success" v-on:click="submitWord">Submit Word</button>
                 <button class="btn btn-warning" v-on:click="showAnswers">Show Answers</button>
                 </br></br>
-                <board v-bind:game="game"></board>
+                
             </div>
         </div>
         <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>

@@ -8,7 +8,9 @@ and open the template in the editor.
     Author     : rolf
 */
 .ws-board {
-    
+    padding-right: 0px;
+    padding-left: 0px;
+    margin: 20px;
 }
 
 .ws-cell-can-click:hover {
@@ -16,7 +18,7 @@ and open the template in the editor.
 }
 
 .ws-cell {
-    border: 1px solid blue;
+    border: 1px solid lightgray;
     width: 20px;
     height: 20px;
     float: left;

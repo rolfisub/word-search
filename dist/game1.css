@@ -7,11 +7,16 @@ and open the template in the editor.
     Created on : Sep 17, 2017, 5:25:43 PM
     Author     : rolf
 */
+.ws-board {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin: 20px; }
+
 .ws-cell-can-click:hover {
   background-color: red; }
 
 .ws-cell {
-  border: 1px solid blue;
+  border: 1px solid lightgray;
   width: 20px;
   height: 20px;
   float: left;

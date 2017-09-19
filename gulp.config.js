@@ -6,9 +6,9 @@ module.exports = config();
 
 function config() {
     var paths = {
-        app: './app/',
-        styles: './css/',
-        dist: './dist/'
+        app: 'app/',
+        styles: 'css/',
+        dist: 'dist/'
     };
     
     var mainAppFile = 'game1.js';
@@ -18,7 +18,7 @@ function config() {
         source: {
             scripts: [
                 paths.app + '**/*.js',
-                paths.app + mainAppFile,
+                paths.app + mainAppFile
             ],
             styles: [
                 paths.styles + 'game1.scss',
