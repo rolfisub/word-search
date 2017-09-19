@@ -516,7 +516,7 @@ var ws = new Vue({
                     canClick: true
                 };
             },
-            size: 8,
+            size: 12,
             cells: [],
             allowedLetters: [
                 'A','B','C','D','E','F','G','H','I',
@@ -526,7 +526,7 @@ var ws = new Vue({
             currentWord: '',
             words: {
                 words:[],
-                count: 3,
+                count: 8,
                 maxCollisionLetters: 1
             },
             allowedDirections:[
@@ -564,6 +564,11 @@ var ws = new Vue({
                 }
             ],
             currentDirection: -1
+        },
+        scoring:{
+            perWord: {
+                points: 20
+            }
         },
         player: {
             name: '',
@@ -880,19 +885,23 @@ var ws = new Vue({
             var game = this.game;
             game.currentWord;
             
+            var solved = false;
+            
             game.words.words.forEach(function(word){
                 if(game.currentWord === word.word) {
                     word.solved = true;
+                    solved = true;
                     game.currentWord = '';
                     game.currentDirection = -1;
                 }
             }, this);
-            
-            game.cells.forEach(function(cellRow){
-                cellRow.forEach(function(cell){
-                    cell.canClick = true;
-                },this);
-            }, this);
+            if(solved) {
+                game.cells.forEach(function(cellRow){
+                    cellRow.forEach(function(cell){
+                        cell.canClick = true;
+                    },this);
+                }, this);
+            }
             
         },
         showAnswers: function() {
