@@ -11,7 +11,6 @@ Todo: </br>
 Known issues: </br>
 - Cell component seems very heavy in logic which can be reused in other parts maybe.</br>
 - After you click on show answers, need to set all words to solved. </br>
-- If game is too small, can cause infinite loop (because words dont fit)</br>
 </br>
 Fixed issues: </br>
 - Words still overlap eachother on game generation. (need to work on collision detection). </br>
