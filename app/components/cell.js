@@ -23,28 +23,29 @@ Vue.component(
                 
             };
         },
-        methods: {            
+        methods: {
+            getFirstSelectedCell: function(){
+                for(var x = 0; x < this.game.cells.length; x++) {
+                    for(var y = 0; y < this.game.cells[x].length; y++) {
+                        //count clicked cells
+                        if(this.game.cells[x][y].clicked) {
+                            return this.game.cells[x][y];
+                        }
+                    }
+                }
+                return null;
+            },
             clickMe: function() {
+                var api = this.api();
                 if(this.cell.canClick === true) {
                     
                     //toggles selection
                     this.cell.clicked = !this.cell.clicked;
                     
-                    //trigger parent cellClick method
-                    this.api.cellClick(this.cell);
-
-                    var getFirstSelectedCell = function(){
-                        for(var x = 0; x < this.game.cells.length; x++) {
-                            for(var y = 0; y < this.game.cells[x].length; y++) {
-                                //count clicked cells
-                                if(this.game.cells[x][y].clicked) {
-                                    return this.game.cells[x][y];
-                                }
-                            }
-                        }
-                        return null;
-                    };
                     
+                    //trigger parent cellClick method
+                    api.cellClick(this.cell);
+
                     //if new status is clicked
                     if(this.cell.clicked) {
                         this.cell.canClick = true;
@@ -57,22 +58,24 @@ Vue.component(
                         //if direction not determined
                         if(this.game.currentDirection === -1) {
                             //set all to can click yes
-                            setAllCanClick(false, this.game);
-                            var onlyCell = getFirstSelectedCell();
+                            api.setAllCanClick(false);
+                            var onlyCell = this.getFirstSelectedCell();
                             if(onlyCell) {
                                 onlyCell.canClick = true;
-                                this.api.activateAllowedCells(onlyCell);
+                                api.activateAllowedCells(onlyCell);
                             } else {
-                                this.api.setAllCanClick(true);
+                                api.setAllCanClick(true);
                             }
                             
                         } else {
                             var direction = this.game.allowedDirections[this.game.currentDirection];
                             var cell = this.game.cells[this.cell.x - direction.x][this.cell.y - direction.y];
                             cell.canClick = true;
-                            this.api.activateAllowedCells(cell);
+                            api.activateAllowedCells(cell);
                         }
                     }
+                    //submit the word after each click
+                    api.submitWord();
                 }
             }
         },

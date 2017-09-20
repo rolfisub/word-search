@@ -87,6 +87,7 @@ var ws = new Vue({
             return {
                 //events
                 cellClick: this.cellClick,
+                submitWord: this.submitWord,
                 //helpers
                 isVectorInBoard: this.isVectorInBoard,
                 setAllCanClick: this.setAllCanClick,
@@ -169,14 +170,16 @@ var ws = new Vue({
             return vectors;
         },
         doesWordFit: function(startPos, direction, word) {
-            var newX = startPos.x;
-            var newY = startPos.y;
+            var vector = {
+                x: startPos.x,
+                y: startPos.y
+            };
             for(var i = 0; i < word.word.length; i++) {
-                if(!this.isVectorInBoard(startPos)) {
+                if(!this.isVectorInBoard(vector)) {
                     return false;
                 }
-                newX += direction.x;
-                newY += direction.y;
+                vector.x += direction.x;
+                vector.y += direction.y;
             }
             return true;
         },
@@ -240,8 +243,7 @@ var ws = new Vue({
         },
         drawWord: function(word) {
             word.vectors.forEach(function(vector, key){
-                var letter = this.getLetterByIndex(word, key);
-                this.game.cells[vector.x][vector.y].letter = letter;
+                this.game.cells[vector.x][vector.y].letter = this.getLetterByIndex(word, key);
             }, this);
         },
         newGame: function(){
@@ -257,7 +259,7 @@ var ws = new Vue({
             
             //generate words
             game.words.words = this.getRandomWords(parseInt(game.words.count));
-            
+
             //set up words in board
             game.words.words.forEach(function(word){
                 //get random vector
@@ -279,8 +281,12 @@ var ws = new Vue({
                 
                 //error game is not valid
                 if(loopCounter === maxLoops) {
-                    //remove one word
-                    game.words.count--;
+                    //remove one word or generate random amount
+                    if(game.words.count < 1) {
+                        game.words.count = this.getRandomInt(2, 10);
+                    } else {
+                        game.words.count--;
+                    }
                     //add one cell
                     game.size++;
                     
@@ -288,37 +294,45 @@ var ws = new Vue({
                     this.newGame();
                     
                 }
-                word.x = rVector.x;
-                word.y = rVector.y;
-                word.direction = rDirection;
-                word.vectors = this.getWordVectors(word);
+                if(this.isWordOkToDraw(rVector, rDirection, word)) {
+                    word.x = rVector.x;
+                    word.y = rVector.y;
+                    word.direction = rDirection;
+                    word.vectors = this.getWordVectors(word);
                 
-                //word is ok to draw
-                this.drawWord(word);
+                    //word is ok to draw
+                    this.drawWord(word);
+                } else {
+                    //rogue word need to reset
+                    this.newGame();
+                }
                 
             }, this);
         },
         submitWord: function() {
+            
             //check if the word is found and change its vetors to clicked
             var game = this.game;
-            game.currentWord;
-            
             var solved = false;
             
             game.words.words.forEach(function(word){
                 if(game.currentWord === word.word) {
                     word.solved = true;
                     solved = true;
-                    game.currentWord = '';
+                    
                     game.currentDirection = -1;
                 }
             }, this);
             if(solved) {
+                console.log('congrats! ' + game.currentWord + ' is found!');
+                game.currentWord = '';
                 game.cells.forEach(function(cellRow){
                     cellRow.forEach(function(cell){
                         cell.canClick = true;
                     }, this);
                 }, this);
+            } else {
+                console.log('sorry ' + game.currentWord + ' not found');
             }
             
         },
