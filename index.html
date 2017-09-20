@@ -18,7 +18,7 @@ and open the template in the editor.
             <div id="wordSearch">
                 <h3>Welcome to Word Search Game</h3>
                 <h4>Selected Word: {{game.currentWord}}<h4>
-                <board v-bind:game="game" v-bind:submit-word="submitWord"></board>
+                <board v-bind:game="game" v-bind:api="getPublicApi"></board>
                 <label for="gameSize">
                     Game size: <input name="gameSize" type="number" v-model="game.size"/>
                 </label>
