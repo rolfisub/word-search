@@ -319,12 +319,12 @@ var ws = new Vue({
                 if(game.currentWord === word.word) {
                     word.solved = true;
                     solved = true;
-                    
                     game.currentDirection = -1;
                 }
             }, this);
             if(solved) {
                 console.log('congrats! ' + game.currentWord + ' is found!');
+                this.player.score += this.scoring.perWord.points;
                 game.currentWord = '';
                 game.cells.forEach(function(cellRow){
                     cellRow.forEach(function(cell){
