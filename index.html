@@ -17,6 +17,10 @@ and open the template in the editor.
         <div class="container-fluid">
             <div id="wordSearch">
                 <h3>Welcome to Word Search Game</h3>
+                <label for="playerName">
+                    Player: <input name="playerName" type="text" v-model="player.name"/>
+                </label>
+                <h4>Score: {{player.score}}</h4>
                 <h4>Selected Word: {{game.currentWord}}<h4>
                 <board v-bind:game="game" v-bind:api="getPublicApi"></board>
                 <label for="gameSize">
